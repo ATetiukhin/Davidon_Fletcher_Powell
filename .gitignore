@@ -1,3 +1,7 @@
+# Ignore directory
+build/
+.idea/
+
 # Compiled Object files
 *.slo
 *.lo

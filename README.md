@@ -1,1 +1,1 @@
-# Davidon_Fletcher_Powell
+# Davidon–Fletcher–Powell method
