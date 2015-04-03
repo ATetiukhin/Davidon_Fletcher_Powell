@@ -23,7 +23,7 @@ if __name__ == "__main__":
         generate_project += r'cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=' + build + ' ' + source_directory
         build_project = r'mingw32-make'
     elif name_system == 'Linux' or name_system == 'Darwin':
-        generate_project += r'cmake -G "Unix Makefiles" ' + source_directory
+        generate_project += r'cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=' + build + ' ' + source_directory
         build_project = r'make'
 
 
