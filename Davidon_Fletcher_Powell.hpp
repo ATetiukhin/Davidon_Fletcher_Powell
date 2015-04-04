@@ -1,9 +1,7 @@
 #pragma once
 
-#include <functional>
-#include <complex>
-#include <cassert>
-
+#include <boost/assert.hpp>
+#include <boost/function.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -22,12 +20,12 @@ namespace std_utils {
 
     template <class T> struct Function {
         const std::size_t size;
-        const std::function<T(const ublas::vector<T> &)> function;
-        const std::function<ublas::vector<T>(const ublas::vector<T> &)> gradient;
+        const boost::function<T(const ublas::vector<T> &)> function;
+        const boost::function<ublas::vector<T>(const ublas::vector<T> &)> gradient;
 
         Function(std::size_t size,
-            std::function<T(const ublas::vector<T> &)> f,
-            std::function<ublas::vector<T>(const ublas::vector<T> &)> grad)
+            boost::function<T(const ublas::vector<T> &)> f,
+            boost::function<ublas::vector<T>(const ublas::vector<T> &)> grad)
             : size(size)
             , function(f)
             , gradient(grad) {
@@ -67,7 +65,7 @@ namespace std_utils {
                 }
             }
 
-            assert((a + b) / 2 >= 0.0);
+            BOOST_ASSERT((a + b) / 2 >= 0.0);
             return (a + b) / 2;
         }
     }
