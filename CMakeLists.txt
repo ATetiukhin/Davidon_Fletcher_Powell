@@ -5,12 +5,6 @@ set(PROJECT_NAME Optimization)
 set(APP_NAME Davidon_Fletcher_Powell)
 project(${PROJECT_NAME})
 
-set(VERSION_MAJOR 1)
-set(VERSION_MINOR 0)
-set(VERSION_PATCH 0)
-set(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
-message(STATUS "VERSION: " ${VERSION})
-
 ############################################################################################
 
 # OS settings
@@ -65,9 +59,9 @@ elseif (CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIRECTORY} CACHE STRING "" FORCE)
 
     # Compiler flags
-    set(CMAKE_CXX_FLAGS "-std=c++11 -Wall" CACHE STRING "" FORCE)
-    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0" CACHE STRING "" FORCE)
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -D__NO_INLINE__" CACHE STRING "" FORCE)
+    set(CMAKE_CXX_FLAGS " -std=c++11 -Wall " CACHE STRING "" FORCE)
+    set(CMAKE_CXX_FLAGS_DEBUG " -g -O0 " CACHE STRING "" FORCE)
+    set(CMAKE_CXX_FLAGS_RELEASE " -O2 " CACHE STRING "" FORCE)
 
     # Linker flags
     set(CMAKE_EXE_LINKER_FLAGS " -static-libgcc -static-libstdc++ -static " CACHE STRING "" FORCE)
@@ -77,4 +71,3 @@ elseif (CMAKE_COMPILER_IS_GNUCXX)
 endif (MSVC)
 
 ############################################################################################
-

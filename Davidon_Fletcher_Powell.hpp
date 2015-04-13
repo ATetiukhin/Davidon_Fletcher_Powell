@@ -1,10 +1,12 @@
 #pragma once
 
+#include <cfloat>
+
 #include <boost/assert.hpp>
 #include <boost/function.hpp>
+#include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
-#include <boost/numeric/ublas/io.hpp>
 
 namespace std_utils {
     namespace ublas = boost::numeric::ublas;
@@ -64,18 +66,17 @@ namespace std_utils {
                     b = x_2;
                 }
             }
-
-            BOOST_ASSERT((a + b) / 2 >= 0.0);
             return (a + b) / 2;
         }
-    }
+    } /* namespace details */
 
     template <class T>
-    ublas::vector<T> DavidonFletcherPowell(const Function<T> & f, ublas::vector<T> x, const double epsilon) {
+    ublas::vector<T> DavidonFletcherPowell(const Function<T> & f, ublas::vector<T> x, const double epsilon, std::size_t & number_iteration) {
         using namespace ublas;
 
         vector<T> grad(f.gradient(x));
         matrix<T> eta(identity_matrix<T>(f.size));
+
         vector<T> old_x = x;
         vector<T> old_grad = grad;
 
@@ -87,11 +88,13 @@ namespace std_utils {
         matrix<T> A;
         matrix<T> B;
 
-        for (; ublas::norm_2(grad) >= epsilon; old_x = x, old_grad = grad) {
+        for (; ublas::norm_2(grad) >= epsilon && number_iteration < 1E6; old_x = x, old_grad = grad, ++number_iteration) {
             d = -prod(eta, grad);
 
             // Looking for the minimum of F(x - alpha * d) using the method of one-dimensional optimization.
-            alpha = details::find_min(f, x, d, T(0), T(1E5));
+            alpha = details::find_min(f, x, d, T(0.0), T(1E3));
+            BOOST_ASSERT(alpha >= DBL_EPSILON);
+
             x = x + alpha * d;
             grad = f.gradient(x);
 
@@ -108,4 +111,6 @@ namespace std_utils {
 
         return x;
     }
-}
+} /* namespace std_utils */
+
+/* End of 'Davidon_Fletcher_Powell.hpp' file */
