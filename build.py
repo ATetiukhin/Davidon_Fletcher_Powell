@@ -40,7 +40,7 @@ if __name__ == "__main__":
     build_flag = 1
     name_system = platform.system()
     if name_system == 'Windows':
-        compiler_flag = 1
+        compiler_flag = 0
         solution(directory_solution, cmake_generator[compiler_flag], cmake_build_type[build_flag],
                  build_project[compiler_flag])
     elif name_system == 'Linux' or name_system == 'Darwin':
