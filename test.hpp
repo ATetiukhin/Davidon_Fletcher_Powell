@@ -4,6 +4,7 @@ typedef double type_t;
 using matrix_t = boost::numeric::ublas::matrix<type_t>;
 using vector_t = boost::numeric::ublas::vector<type_t>;
 
+// 100 * (x_2 - x_1^2)^2 + (1 - x_1)^2
 type_t function(const vector_t & x);
 vector_t gradient(const vector_t & x);
 matrix_t hessian(const vector_t & x);

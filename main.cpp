@@ -23,9 +23,9 @@ int main() {
     vector_t solution;
 
     Function<> f(2, function, gradient, hessian);
-    vector_t x(make_unbounded_array({ -0.5, 0.5 }));
     //vector_t x(make_unbounded_array({ -1.2, 1.0 }));
-    //vector_t x(make_unbounded_array({ -18.0, 19.0 }));
+    vector_t x(make_unbounded_array({ -0.5, 0.5 }));
+    //vector_t x(make_unbounded_array({ -8.0, 9.0 }));
 
     solution = DavidonFletcherPowell(f, x, epsilon, number_iteration = 0);
     std::cout << "Davidon-Fletcher-Powell:" << std::endl;
